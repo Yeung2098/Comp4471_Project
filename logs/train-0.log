@@ -1,0 +1,19 @@
+Use trained model for evaluation? (y/n): Torch CUDA available: True
+Proceed with training? (y/n): Enter fold of dataset to train (e.g., '0' for fold-0): {'loss': 0.3905, 'grad_norm': 12.984206199645996, 'learning_rate': 2.8154130702836004e-05, 'epoch': 0.62}
+{'loss': 0.1096, 'grad_norm': 20.31715202331543, 'learning_rate': 2.630456226880395e-05, 'epoch': 1.23}
+{'loss': 0.0875, 'grad_norm': 0.07545696943998337, 'learning_rate': 2.4454993834771888e-05, 'epoch': 1.85}
+{'loss': 0.0747, 'grad_norm': 2.0835587978363037, 'learning_rate': 2.2605425400739826e-05, 'epoch': 2.47}
+{'loss': 0.0663, 'grad_norm': 1.7239971160888672, 'learning_rate': 2.0755856966707768e-05, 'epoch': 3.08}
+{'loss': 0.052, 'grad_norm': 1.1762861013412476, 'learning_rate': 1.890628853267571e-05, 'epoch': 3.7}
+{'loss': 0.0504, 'grad_norm': 5.11068868637085, 'learning_rate': 1.705672009864365e-05, 'epoch': 4.32}
+{'loss': 0.0432, 'grad_norm': 11.68822193145752, 'learning_rate': 1.520715166461159e-05, 'epoch': 4.93}
+{'loss': 0.0382, 'grad_norm': 1.7508922815322876, 'learning_rate': 1.3357583230579532e-05, 'epoch': 5.55}
+{'loss': 0.0281, 'grad_norm': 0.6747691631317139, 'learning_rate': 1.1508014796547472e-05, 'epoch': 6.17}
+{'loss': 0.0266, 'grad_norm': 2.3585147857666016, 'learning_rate': 9.658446362515414e-06, 'epoch': 6.78}
+{'loss': 0.0208, 'grad_norm': 0.21327871084213257, 'learning_rate': 7.808877928483354e-06, 'epoch': 7.4}
+{'loss': 0.0202, 'grad_norm': 0.12165683507919312, 'learning_rate': 5.959309494451295e-06, 'epoch': 8.01}
+{'loss': 0.0144, 'grad_norm': 1.8927308320999146, 'learning_rate': 4.109741060419236e-06, 'epoch': 8.63}
+{'loss': 0.0109, 'grad_norm': 1.0897279977798462, 'learning_rate': 2.260172626387176e-06, 'epoch': 9.25}
+{'loss': 0.0091, 'grad_norm': 0.13039356470108032, 'learning_rate': 4.1060419235511713e-07, 'epoch': 9.86}
+{'train_runtime': 20997.3576, 'train_samples_per_second': 6.178, 'train_steps_per_second': 0.386, 'train_loss': 0.06439423207584057, 'epoch': 10.0}
+{'eval_loss': 0.06916395574808121, 'eval_runtime': 228.3176, 'eval_samples_per_second': 6.425, 'eval_steps_per_second': 0.403, 'epoch': 10.0}
