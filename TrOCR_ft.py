@@ -106,27 +106,27 @@ def custom_data_collator(batch):
 
 
 if __name__ == "__main__":
-    # Decide to use trained model for evaluation or not
+
+    ext = input("Enter fold of dataset to train/evaluate (e.g., '0' for fold-0): ")
+    training_args = Seq2SeqTrainingArguments(
+        output_dir=f"./models/trocr-hasyv2-{ext}",
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
+        predict_with_generate=True,
+        num_train_epochs=5,
+        learning_rate=3e-4,
+        save_total_limit=2,
+        fp16=torch.cuda.is_available(),
+        dataloader_pin_memory=torch.cuda.is_available(),
+    )
+
     use_trained = input("Use trained model for evaluation? (y/n): ").lower() == 'y'
 
     if use_trained:
-        fold = input("Enter fold of dataset to evaluate (e.g., '0' for fold-0): ")
-        fold = int(fold)
-
-        training_args = Seq2SeqTrainingArguments(
-            output_dir=f"./models/trocr-hasyv2-{fold}",
-            per_device_train_batch_size=16,
-            per_device_eval_batch_size=16,
-            predict_with_generate=True,
-            num_train_epochs=5,
-            save_total_limit=2,
-            fp16=torch.cuda.is_available(),
-            dataloader_pin_memory=torch.cuda.is_available(),
-        )
-        model = VisionEncoderDecoderModel.from_pretrained(f"./trocr-hasyv2{fold}")
-        processor = TrOCRProcessor.from_pretrained(f"./trocr-hasyv2{fold}")
+        model = VisionEncoderDecoderModel.from_pretrained(f"./models/trocr-hasyv2-{ext}")
+        processor = TrOCRProcessor.from_pretrained(f"./models/trocr-hasyv2-{ext}")
         data_files = {"train": "train.csv", "test": "test.csv"}
-        dataset_name = './hasyv2_ds/classification-task/fold-' + str(fold) + '/'
+        dataset_name = './hasyv2_ds/classification-task/fold-' + str(ext) + '/'
         dataset = load_dataset(dataset_name, data_files=data_files)
         test_dataset = dataset["test"].map(preprocess_function, batched=True)
         trainer = Seq2SeqTrainer(
@@ -143,11 +143,6 @@ if __name__ == "__main__":
     out = input("Proceed with training? (y/n): ")
     if out.lower() != 'y':
         exit(0)
-    #make sure the input is number between 0-10
-    ext = input("Enter fold of dataset to train (e.g., '0' for fold-0): ")
-    ext = int(ext)
-    while not (0 <= ext <= 10):
-        ext = int(input("Invalid input. Please enter a number between 0 and 10: "))
 
     # 1) Load model & processor
     model_id = "microsoft/trocr-small-stage1"
@@ -181,20 +176,7 @@ if __name__ == "__main__":
     train_dataset = dataset["train"].map(preprocess_function, batched=True)
     test_dataset = dataset["test"].map(preprocess_function, batched=True)
 
-    # 3) Define training arguments and trainer
-
-    training_args = Seq2SeqTrainingArguments(
-        output_dir=f"./trocr-hasyv2-{ext}",
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
-        predict_with_generate=True,
-        num_train_epochs=10,
-        learning_rate=3e-5,
-        weight_decay=0.01,
-        save_total_limit=2,
-        fp16=torch.cuda.is_available(),
-        dataloader_pin_memory=torch.cuda.is_available(),
-    )
+    # 3) Define trainer
 
     data_collator = custom_data_collator
     trainer = Seq2SeqTrainer(
