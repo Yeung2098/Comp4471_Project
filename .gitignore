@@ -1,3 +1,4 @@
 *.exe
 *.safetensors
+sanguine-casing-416907-cda60e59ac44.json
 optimizer.pt
